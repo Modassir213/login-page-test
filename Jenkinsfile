@@ -34,9 +34,9 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-                sshagent(['ec2-ssh']) {
+                sshagent(['ec2-ssh']) {    // ✔️ Correct credential ID
                     sh '''
-                            ssh -o StrictHostKeyChecking=no ubuntu@3.108.236.212 "
+                        ssh -o StrictHostKeyChecking=no ubuntu@3.108.236.212 "
                             docker pull modassirkhan213/login-page:latest &&
                             docker stop login || true &&
                             docker rm login || true &&
@@ -46,5 +46,6 @@ pipeline {
                 }
             }
         }
+
     }
 }
